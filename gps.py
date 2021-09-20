@@ -2,7 +2,7 @@
 
 '''
 CPSC 415 -- Homework #2 template
-Stephen Davies, University of Mary Washington, fall 2021
+Daffney Myers, University of Mary Washington, fall 2021
 '''
 
 from atlas import Atlas
@@ -19,9 +19,18 @@ def find_best_path(atlas):
     of that path.'''
 
     # THIS IS WHERE YOUR AMAZING CODE GOES
-
-    # Here's a (bogus) example return value:
-    return ([0,3,2,4],970)
+    chart = Atlas()
+    path = [] # used to store the nodes visited
+    cost = 0 # used to store total path cost
+    #current node
+    #goal node
+    
+    #while loop to continue until reached goal city -- how do I know start and end
+    #if loops to check distance in "chart"(i,j)
+    
+    #maybe recursive call instead of while loop to avoid infinite loop
+    #using stack
+    return (path,cost)
 
 
 
