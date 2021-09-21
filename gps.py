@@ -9,6 +9,7 @@ from atlas import Atlas
 import numpy as np
 import logging
 import sys
+import math
 
 
 def find_best_path(atlas):
@@ -19,17 +20,46 @@ def find_best_path(atlas):
     of that path.'''
 
     # THIS IS WHERE YOUR AMAZING CODE GOES
-    chart = Atlas()
-    path = [] # used to store the nodes visited
+    path = [0] # used to store the nodes visited
     cost = 0 # used to store total path cost
-    #current node
-    #goal node
+    current_city = 0 #used to remember where we are
+    goal_city = atlas.get_num_cities() - 1 #wanted city
+    poss_dist = 0 #used to test cheaper path
+    poss_node = 0 #used to remember cheaper path outside of loop
     
-    #while loop to continue until reached goal city -- how do I know start and end
-    #if loops to check distance in "chart"(i,j)
     
-    #maybe recursive call instead of while loop to avoid infinite loop
-    #using stack
+    while current_city != goal_city:
+        small_dist = math.inf #temp. make smallest infinity
+        small_node = math.inf #temp. make smallest infinity
+        
+        #for loop check all distances between current_city to next node(i) (0 - numcities)
+        for i in range(0, atlas.get_num_cities()):
+            
+            #makes sure no path = 0
+            if i != current_city:
+                poss_dist = atlas.get_road_dist(current_city, i)
+                poss_node = i
+            
+            #keep shortest path as long as it is not infinite
+            if poss_dist < small_dist and poss_dist != math.inf:
+                small_dist = poss_dist
+                small_node = poss_node
+        
+        if small_node == math.inf:
+            print("Route not available")
+            break
+        
+        elif small_node not in path:
+            
+            #go to new node (j) and add to path[]
+            path.append(small_node)
+            
+            #add to total cost
+            cost = cost + small_dist
+            
+            #change current node to (j)
+            current_city = small_node
+        
     return (path,cost)
 
 
